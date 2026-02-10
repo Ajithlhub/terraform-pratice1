@@ -1,6 +1,6 @@
 resource "aws_instance" "web" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
+  ami           = var.instance_class
+  instance_type = var.db_user
   subnet_id     = var.subnet_id
 
   tags = {

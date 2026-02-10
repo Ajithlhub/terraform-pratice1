@@ -12,11 +12,19 @@ module "ec2" {
   subnet_id     = module.vpc.subnet_id
 }
 
-#module "rds" {
-  #source         = "./modules/rds"
-  #subnet_id      = module.vpc.subnet_id
-  #instance_class = "db.t3.micro"
-  #db_name        = "mydb"
-  #db_user        = "admin"
- # db_password    = "Admin12345"
-#}
+module "rds" {
+  source         = "./modules/rds"
+  subnet_id      = module.vpc.subnet_id
+  instance_class = "db.t3.micro"
+  db_name        = "mydb"
+  db_user        = "admin"
+ db_password    = "Admin12345"
+
+ }
+
+module "s3"{
+source = "./modules/s3"
+aws_s3_bucket = "gtcftyfgjhguitfgyu"
+
+  
+}
