@@ -1,0 +1,30 @@
+name: Terraform Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          repository: Ajithlhub/terraform-pratice1
+          ref: main
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        working-directory: Day-2-main-config-files
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: Day-2-main-config-files
+        run: terraform plan
