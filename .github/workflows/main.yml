@@ -1,10 +1,9 @@
-name: Terraform Pipeline
+name: Terraform AWS Pipeline
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   terraform:
@@ -12,14 +11,18 @@ jobs:
 
     steps:
 
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v4
-        with:
-          repository: Ajithlhub/terraform-pratice1
-          ref: main
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
 
       - name: Terraform Init
         working-directory: Day-2-main-config-files
